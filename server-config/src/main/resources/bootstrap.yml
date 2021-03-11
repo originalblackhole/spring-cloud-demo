@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: server-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/original-blackhole/config-repo.git
+          search-paths: config-repo
+          force-pull: true
+          default-label: master
+          username: 13715052994
+          password: gm152688..
+
+  rabbitmq:
+    host: 192.168.3.63
+    port: 5672
+    username: admin
+    password: admin
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh    #手动刷新    http://localhost:8889/actuator/refresh    自动刷新配置: 把手动刷新的地址配置到webhook上
+  endpoint:
+    health:
+      show-details: always
+

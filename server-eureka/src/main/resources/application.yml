@@ -26,3 +26,5 @@ eureka:
     enable-self-preservation: false
     #扫描失效服务的间隔时间（单位是毫秒，摩恩是60*1000)，即60s
     eviction-interval-timer-in-ms: 10000
+
+#test: local
