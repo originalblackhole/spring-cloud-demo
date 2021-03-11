@@ -12,6 +12,11 @@ IID=$(docker images | grep "$SERVER_NAME" | awk '{print $3}')
 echo "最新构建代码 $SOURCE_PATH/$SERVER_NAME/target/server-eureka.jar 迁移至 $BASE_PATH ...."
 #把项目从jenkins构建后的目录移动到我们的项目目录下同时重命名下
  mv $SOURCE_PATH/$SERVER_NAME/$SERVER_NAME/target/server-eureka-0.0.1-SNAPSHOT.jar $BASE_PATH/server-eureka.jar
+
+ mv /home/jenkins/workspace/server-eureka/server-eureka/docker.sh /usr/local/jenkins/docker.sh
+
+ mv /home/jenkins/workspace/server-eureka/server-eureka/Dockerfile /usr/local/jenkins/Dockerfile
+
 #修改文件的权限
 echo "修改$BASE_PATH/$SERVER_NAME文件的权限"
  chmod 777 $(BASE_PATH)/$(SERVER_NAME).jar
