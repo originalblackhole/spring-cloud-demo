@@ -23,13 +23,15 @@ else
 	cd $BASE_PATH
 	docker build -t $SERVER_NAME .
 fi
+
+if [ -n "$CID" ] ;then
+	echo "存在$SERVER_NAME容器，CID=$CID"
+	docker stop $SERVER_NAME
+	docker rm $SERVER_NAME
+else
+	echo "不存在$SERVER_NAME容器"
+fi
 # 运行docker容器
-#删除原来的容器
-docker rm $SERVER_NAME
-# --name docker-test                 容器的名字为docker-test
-#   -d                                 容器后台运行
-#   -p 3636:3636                       指定容器映射的端口和主机对应的端口都为3636
-#   -v /usr/ms_backend/:/usr/ms_backend/   将主机的/usr/ms_backend/目录挂载到容器的/usr/ms_backend/ 目录中（不可少每次本地更新jar包重启容器即可，不用重新构建镜像
 #docker run --name $SERVER_NAME -v $BASE_PATH:$BASE_PATH -d -p 8761:8761 $SERVER_NAME
 docker run -itd -p 8761:8761 --name $SERVER_NAME --privileged=true -v $BASE_PATH:$BASE_PATH $SERVER_NAME
 echo "$SERVER_NAME容器创建完成"
