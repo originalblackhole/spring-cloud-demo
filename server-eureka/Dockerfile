@@ -1,7 +1,7 @@
 # 下载maven与java的镜像
 FROM hub.c.163.com/wuxukun/maven-aliyun:3-jdk-8
 # 指定当前操作目录
-WORKDIR /usr/local/jenkins
+WORKDIR /usr/local/jenkins/server-eureka
 #指定对外端口号
 EXPOSE 8761
 #启动java程序
