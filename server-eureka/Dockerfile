@@ -6,4 +6,4 @@ WORKDIR /usr/local/jenkins/server-eureka
 EXPOSE 8761
 #启动java程序
 #--spring.profiles.active=dev 多环境下指定环境 。 -c为清除以前启动的数据
-ENTRYPOINT ["java","-jar","./target/server-eureka-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar",".server-eureka-0.0.1-SNAPSHOT.jar"]
