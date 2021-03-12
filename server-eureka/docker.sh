@@ -14,5 +14,5 @@ if [ -n "$CID" ] ;then
 fi
 
 
-sudo docker run -u root --rm -d -p 8761:8761 --name $SERVER_NAME --privileged=true -v $BASE_PATH:$BASE_PATH server/eureka:latest
+sudo docker run -u root --rm -d -p 8761:8761 --name server-eureka --privileged=true -v $BASE_PATH:$BASE_PATH server/eureka:latest
 #sudo docker run -u root --rm -d -p 8761:8761 --name $SERVER_NAME --privileged=true -v $BASE_PATH:$BASE_PATH $SERVER_NAME
