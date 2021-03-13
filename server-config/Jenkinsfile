@@ -9,7 +9,7 @@ pipeline {
                 }
             }
             steps {
-                git 'https://github.com/originalblackhole/spring-cloud-demo.git'
+                //git 'https://github.com/originalblackhole/spring-cloud-demo.git'
                 sh 'mvn -B -DskipTests clean package'
             }
         }
