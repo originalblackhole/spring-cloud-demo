@@ -15,18 +15,18 @@ node {
     stage('docker build') {
 
         //删除镜像
-        sh 'chmod +x ./delete.sh'
-        sh './delete.sh'
+        sh 'chmod +x ./server-eureka/build/delete.sh'
+        sh './server-eureka/build/delete.sh'
         //构建镜像
-        def customImage = docker.build("server-eureka:latest")
+        def customImage = docker.build("server-eureka:latest","./server-eureka/build")
 
     }
 
     stage("deploy") {
 
         // 项目部署
-        sh 'chmod +x ./deploy.sh'
-        sh './deploy.sh'
+        sh 'chmod +x ./server-eureka/build/deploy.sh'
+        sh './server-eureka/build/deploy.sh'
 
     }
 }
