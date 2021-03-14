@@ -1,18 +1,9 @@
 #!/usr/bin/env bash
 
 SERVER_NAME=server-eureka
-#容器id
-CID=$(docker ps | grep "$SERVER_NAME" | awk '{print $1}')
-#镜像id
-IID=$(docker images | grep "$SERVER_NAME" | awk '{print $3}')
+BASE_PATH=/usr/local/jenkins/$SERVER_NAME
+# 源jar路径  即jenkins构建后存放的路径
+SOURCE_PATH=/home/jenkins/workspace/$SERVER_NAME/$SERVER_NAME
+#docker 镜像/容器名字或者jar名字 这里都命名为这个
 
-if [ -n "$CID" ] ;then
-	echo "存在$SERVER_NAME容器，CID=$CID"
-	docker stop $SERVER_NAME
-	docker rm $SERVER_NAME
-	echo "删除$SERVER_NAME容器，CID=$CID"
-fi
-
-docker run -d --privileged=true -p 8761:8761  server/eureka
-#删除没有启动的镜像
-docker rmi IID
+docker run --name $SERVER_NAME -d -p 8761:8761 --privileged=true -v :$SOURCE_PATH:$BASE_PATH $SERVER_NAME

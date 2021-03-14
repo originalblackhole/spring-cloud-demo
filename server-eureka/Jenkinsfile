@@ -1,35 +1,32 @@
-pipeline {
-    agent any
-    stages {
-        stage('check') {
-            agent {
-                docker {
-                    image 'maven:3-alpine'
-                    args '-v /root/.m2:/root/.m2'
-                }
-            }
-            steps {
-                //git 'https://github.com/originalblackhole/spring-cloud-demo.git'
-                sh 'mvn -B -DskipTests clean package'
-            }
-        }
+node {
 
-        stage('build'){
-            agent {
-                dockerfile {
-                    filename 'Dockerfile'
-                    dir 'server-eureka'
-                }
-            }
-            steps {
-                sh ' ./build/build.sh'
-            }
-        }
+    //定义mvn环境
+    def mvnHome = tool 'M3'
+    env.PATH = "${mvnHome}/bin:${env.PATH}"
 
-        stage('deploy'){
-            steps {
-                sh ' ./build/docker.sh'
-            }
-        }
+    stage('build') {
+
+        // 打包源码
+        checkout scm
+        sh 'mvn -B -DskipTests clean package'
+
+    }
+
+    stage('docker build') {
+
+        //删除镜像
+        sh 'chmod +x /build/delete.sh'
+        sh '/build/delete.sh'
+        //构建镜像
+        def customImage = docker.build("server-eureka:latest")
+
+    }
+
+    stage("deploy") {
+
+        // 项目部署
+        sh 'chmod +x /build/deploy.sh'
+        sh '/build/deploy.sh'
+
     }
 }
