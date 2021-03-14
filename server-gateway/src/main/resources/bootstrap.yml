@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: server-gateway
+  cloud:
+    config:
+      name:  server-gateway,redis #配置文件名称前缀
+      uri: http://192.168.3.165:8899
+      label: master
+      profile: dev
+server:
+  port: 8866

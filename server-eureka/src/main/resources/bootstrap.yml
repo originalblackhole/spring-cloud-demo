@@ -1,26 +1,42 @@
 server:
-  port: 8761
+  port: 8999
+
 spring:
-  application:
-    name: server-eureka
-  cloud:
-    config:
-      label: master #分支名称
-      name: ${spring.application.name} #配置文件名称前缀
-      profile: dev #后缀名称
-      uri: http://192.168.3.165:8888 #配置中心地址
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
+server:
+  port: 8999
+---
+spring:
+  profiles: prod
+server:
+  port: 8761
 
-  rabbitmq:
-    host: 192.168.3.63
-    port: 5672
-    username: admin
-    password: admin
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: refresh    #手动刷新http://localhost:8889/actuator/refresh    自动刷新配置: 把手动刷新的地址配置到webhook上
-  endpoint:
-    health:
-      show-details: always
+#spring:
+#  application:
+#    name: server-eureka
+#  cloud:
+#    config:
+#      label: master #分支名称
+#      name: ${spring.application.name} #配置文件名称前缀
+#      profile: dev #后缀名称
+#      uri: http://192.168.3.165:8888 #配置中心地址
+
+#  rabbitmq:
+#    host: 192.168.3.63
+#    port: 5672
+#    username: admin
+#    password: admin
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: refresh    #手动刷新http://localhost:8889/actuator/refresh    自动刷新配置: 把手动刷新的地址配置到webhook上
+#  endpoint:
+#    health:
+#      show-details: always

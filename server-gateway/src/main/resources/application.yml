@@ -1,0 +1,71 @@
+server:
+  port: 8866
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.3.165:8999/eureka
+    registry-fetch-interval-seconds: 5 # 拉取服务注册信息间隔时间 (默认为30秒)
+  instance:
+    lease-expiration-duration-in-seconds: 60  # 注册中心超过这个时间没收到心跳，会视为无效节点(默认为90秒)
+    lease-renewal-interval-in-seconds: 30  # 发送心跳间隔时间（默认30秒）
+    preferIpAddress: true
+    instance-id: ${eureka.instance.hostname}:${server.port}
+    hostname: 192.168.3.165
+
+  rabbitmq:
+    host: 192.168.3.63
+    port: 5672
+    username: admin
+    password: admin
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh    #手动刷新    http://localhost:8889/actuator/refresh    自动刷新配置: 把手动刷新的地址配置到webhook上
+  endpoint:
+    health:
+      show-details: always
+
+test: test
+
+#spring:
+#  application:
+#    name: service-gateway
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: open
+#          uri: lb://open
+#          predicates:
+#            - Path=/open/**          #- Path=/gate/,/rule/                          当请求的路径为gate、rule开头的时，转发到http://localhost:9023服务器上
+#            #- Before=2017-01-20T17:42:47.789-07:00[America/Denver]                 在某个时间之前的请求才会被转发到 http://localhost:9023服务器上
+#            #- After=2017-01-20T17:42:47.789-07:00[America/Denver]                  在某个时间之后的请求才会被转发
+#            #- Between=2017-01-20T17:42:47.789-07:00[America/Denver],2017-01-21T17:42:47.789-07:00[America/Denver]   在某个时间段之间的才会被转发
+#            #- Cookie=chocolate, ch.p                                               名为chocolate的表单或者满足正则ch.p的表单才会被匹配到进行请求转发
+#            #- Header=X-Request-Id, \d+                                             携带参数X-Request-Id或者满足\d+的请求头才会匹配
+#            #- Host=www.hd123.com                                                   当主机名为www.hd123.com的时候直接转发到http://localhost:9023服务器上
+#            #- Method=GET                                                           只有GET方法才会匹配转发请求，还可以限定POST、PUT等请求方式
+#
+#          filters:                                                                  #注：当配置多个filter时，优先定义的会被调用，剩余的filter将不会生效
+#            - StripPrefix= 1                                                        #表截取路径的个数为1   比如前端过来请求/test/good/1/view，匹配成功后，路由到后端的请求路径就会变成http://localhost:8888/good/1/view
+#            #- PrefixPath=/app                                                      在请求路径前加上app
+#            #- RewritePath                                                          - RewritePath=/test, /app/test     访问localhost:9022/test,请求会转发到localhost:8001/app/test
+#            #- SetPath                                                              - SetPath=/app/{path}  通过模板设置路径，转发的规则时会在路径前增加app，{path}表示原请求路径
+#            #- RedirectTo                                                           重定向
+#            #- RemoveRequestHeader                                                  去掉某个请求头信息
+#            #- name: RequestRateLimiter #请求数限流 名字不能随便写
+#             # args:
+#               # key-resolver: "#{@ipKeyResolver}"    #用于限流的键的解析器的 Bean 对象的名字。它使用 SpEL 表达式根据#{@beanName}从 Spring 容器中获取 Bean 对象。
+#               # redis-rate-limiter.replenishRate: 1  #令牌桶每秒填充平均速率。
+#               # redis-rate-limiter.burstCapacity: 1  #令牌桶总容量。
+#        - id: system
+#          uri: lb://system
+#          predicates:
+#            - Path=/system/**
+#          filters:
+#            - StripPrefix= 1
+#            - name:
+#              args:
+#                name: fallbackAb
+#                fallbackUri: forward:/fallbackA
