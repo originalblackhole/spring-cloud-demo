@@ -1,5 +1,5 @@
 server:
-  port: 8999
+  port: 8761
 
 spring:
   profiles:
@@ -8,12 +8,12 @@ spring:
 spring:
   profiles: dev
 server:
-  port: 8999
+  port: 8761
 ---
 spring:
   profiles: prod
 server:
-  port: 8761
+  port: 8999
 
 
 #spring:

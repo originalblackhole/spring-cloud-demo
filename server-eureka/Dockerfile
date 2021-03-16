@@ -3,7 +3,7 @@ FROM hub.c.163.com/wuxukun/maven-aliyun:3-jdk-8
 
 WORKDIR /var/jenkins/server-eureka/
 
-ARG PRO_ENV=prod
+ARG PRO_ENV=dev
 
 #RUN yum update -y
 

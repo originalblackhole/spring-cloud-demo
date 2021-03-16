@@ -4,13 +4,14 @@ node {
 
     // 需要手动赋值的变量(是否需要全部移到config.json)
     def appointWorkDir = true                                               // 是否指定挂载目录
-    def projectName = 'server-eureka'                                       // 项目名称
+    def projectName = "server-eureka"                                       // 项目名称  正常情况下evn.JOB_BASE_NAME可以获取,防止有人jenkins创建项目名称不一致
     def hostWorkDir = "/var/jenkins/${projectName}/"                        // 宿主机目录(随便设置)
     def workDir = "/var/jenkins/${projectName}/"                            // 容器目录(Dockerfile中的WORKDIR目录)
     def openPort = "8761"                                                   // 开放的端口(Dockerfile中的EXPOSE,使用该端口映射)
     def otherArgs = "--name ${projectName}"                                 // 自定义其他启动参数(默认启动参数格式为: docker run -d -p 8080:8080 -e pro_env=dev)
-    def buildArgs = " --build-arg PRO_ENV=${env.PRO_ENV} ./${projectName}"  // 自定义其他构建镜像参数(默认参数格式为: docker build -t imageName:tag .)
+    def buildArgs = "--build-arg PRO_ENV=${env.PRO_ENV} ./${projectName}"   // 自定义其他构建镜像参数(默认参数格式为: docker build -t imageName:tag .)
     def mvnCMD = "mvn -pl ${projectName} -am clean package"                 // maven打包命令
+    def configPath = "./${projectName}/build"                               // config.json 路径(最后面斜杆不要填)
 
 
     // 系统变量
@@ -49,7 +50,7 @@ node {
         stage('package') {
 
             // checkout测试时使用,jenkins上面直接使用SCM
-            // checkout([$class: 'GitSCM', branches: [[name: '*/dev']], extensions: [], userRemoteConfigs: [[credentialsId: 'e761309f-146f-4c5f-b7fd-1debf91fef38', url: 'https://gitee.com/original-blackhole/jenkins-test.git']]])
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'e761309f-146f-4c5f-b7fd-1debf91fef38', url: 'https://gitee.com/original-blackhole/spring-cloud-demo.git']]])
             withEnv(["MVN_HOME=$mvnHome"]) {
                 if (isUnix()) {
                     sh "${mvnCMD}"
@@ -59,8 +60,9 @@ node {
             }
 
             // 读取配置信息
-            if(fileExists('config.json')) {
-                def str = readFile 'config.json'
+            if(fileExists("${configPath}/config.json")) {
+
+                def str = readFile "${configPath}/config.json"
                 def jsonSlurper = new JsonSlurper()
                 def obj = jsonSlurper.parseText(str)
                 echo "config.json: ${str}"
@@ -84,8 +86,8 @@ node {
         stage('build'){
 
             // 构建镜像并上传到容器仓库
-            echo "imageName: ${imageName}"
-            def customImage = docker.build(imageName, " --build-arg PRO_ENV=${env.PRO_ENV} .")
+            echo "imageName: ${imageName},buildArgs: buildArgs"
+            def customImage = docker.build(imageName, buildArgs)
             if(!(inputResult.dev)) {
                 echo "registry_credentials_id: ${env.registry_credentials_id} "
                 docker.withRegistry("https://${env.registryName}", env.registry_credentials_id) {
