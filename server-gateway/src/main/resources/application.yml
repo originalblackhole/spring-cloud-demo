@@ -10,7 +10,7 @@ eureka:
     lease-renewal-interval-in-seconds: 30  # 发送心跳间隔时间（默认30秒）
     preferIpAddress: true
     instance-id: ${eureka.instance.hostname}:${server.port}
-    hostname: 123.60.9.127
+    hostname: 192.168.3.165
 
   rabbitmq:
     host: 1.15.123.16
@@ -27,7 +27,7 @@ management:
     health:
       show-details: always
 
-test: test
+#test: test
 
 #spring:
 #  application:

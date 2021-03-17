@@ -13,11 +13,11 @@ eureka:
     instance-id: ${eureka.instance.hostname}:${server.port}
     hostname: 1.15.123.16
 
-  rabbitmq:
-    host: 1.15.123.16
-    port: 5672
-    username: admin
-    password: admin
+#  rabbitmq:
+#    host: 1.15.123.16
+#    port: 5672
+#    username: admin
+#    password: admin
 
 management:
   endpoints:
