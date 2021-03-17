@@ -6,7 +6,7 @@ node {
     def appointWorkDir = true                                               // 是否指定挂载目录
     def projectName = "server-config"                                       // 项目名称  正常情况下evn.JOB_BASE_NAME可以获取,防止有人jenkins创建项目名称不一致
     def hostWorkDir = "/var/jenkins/${projectName}/"                        // 宿主机目录(随便设置)
-    def workDir = "/var/jenkins/${projectName}/"                            // 容器目录(Dockerfile中的WORKDIR目录)
+    def workDir = "/var/jenkins_home/workspace/${projectName}"              // 默认的不需要改变
     def openPort = "8888"                                                   // 开放的端口(Dockerfile中的EXPOSE,使用该端口映射)
     def otherArgs = "--name ${projectName}"                                 // 自定义其他启动参数(默认启动参数格式为: docker run -d -p 8080:8080 -e pro_env=dev)
     def buildArgs = ""                                                      // 自定义其他构建镜像参数(参考格式为: --build-arg param=xxx;Dockerfile文件中如果没有参数就不要填,不然会报错)

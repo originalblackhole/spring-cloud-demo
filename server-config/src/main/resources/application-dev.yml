@@ -11,7 +11,7 @@ eureka:
     preferIpAddress: true
     #instanceId: ${spring.cloud.client.ip-address}:${server.port}
     instance-id: ${eureka.instance.hostname}:${server.port}
-    hostname: 123.60.9.127
+    hostname: 1.15.123.16
 
   rabbitmq:
     host: 1.15.123.16
