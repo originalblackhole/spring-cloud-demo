@@ -9,12 +9,12 @@
       "port": "8761"
     },
     "test": {
-      "credentialsId": "81969f96-e8f1-4e2e-920b-b34b5db48844",
+      "credentialsId": "02f1c758-a98c-4d2e-8ef2-d45f87fe4937",
       "host": "123.60.9.127",
       "port": "8761"
     },
     "prod": {
-      "credentialsId": "81969f96-e8f1-4e2e-920b-b34b5db48844",
+      "credentialsId": "02f1c758-a98c-4d2e-8ef2-d45f87fe4937",
       "host": "1.15.123.16",
       "port": "8761"
     }
