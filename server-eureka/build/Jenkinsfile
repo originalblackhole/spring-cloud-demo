@@ -13,6 +13,7 @@ node {
     def dockerFilePath = "./${projectName}"                                     // Dockerfile文件路径(当前路径为 .)
     def mvnCMD = "mvn -pl ${projectName} -am clean package"                     // maven打包命令
     def configPath = "./${projectName}/build"                                   // config.json 路径(最后面斜杆不要填)
+    def branch = "master"                                                       // config.json 路径(最后面斜杆不要填)
 
 
     // 系统变量
@@ -52,7 +53,7 @@ node {
         stage('package') {
 
             // checkout测试时使用,jenkins上面直接使用SCM
-            //checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'e761309f-146f-4c5f-b7fd-1debf91fef38', url: 'https://gitee.com/original-blackhole/spring-cloud-demo.git']]])
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'e761309f-146f-4c5f-b7fd-1debf91fef38', url: 'https://gitee.com/original-blackhole/spring-cloud-demo.git']]])
             withEnv(["MVN_HOME=$mvnHome"]) {
                 if (isUnix()) {
                     sh "${mvnCMD}"

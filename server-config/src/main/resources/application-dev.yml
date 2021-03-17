@@ -27,3 +27,7 @@ management:
   endpoint:
     health:
       show-details: always
+
+
+
+# https://blog.csdn.net/wtdm_160604/article/details/83720391

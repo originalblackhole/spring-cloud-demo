@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "registryName": "ccr.ccs.tencentyun.com/blackhole/server-config",
-  "registry_credentials_id": "a5613adf-a89a-443e-932c-d31dff210b76",
+  "registry_credentials_id": "8aef08a4-3128-48ce-adbc-a57f446bb9a9",
   "env": {
     "dev": {
       "credentialsId": "f4484dff-b085-4332-81dd-e3bc225e696c",
