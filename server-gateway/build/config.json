@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "registryName": "ccr.ccs.tencentyun.com/blackhole/jenkins-test",
+  "registryName": "ccr.ccs.tencentyun.com/blackhole/server-geteway",
   "registry_credentials_id": "a5613adf-a89a-443e-932c-d31dff210b76",
   "env": {
     "dev": {
