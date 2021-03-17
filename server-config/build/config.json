@@ -9,12 +9,12 @@
       "port": "8888"
     },
     "test": {
-      "credentialsId": "02f1c758-a98c-4d2e-8ef2-d45f87fe4937",
+      "credentialsId": "eb83248c-d297-48a3-a0c1-f3b6fd0ba6b0",
       "host": "123.60.9.127",
       "port": "8888"
     },
     "prod": {
-      "credentialsId": "02f1c758-a98c-4d2e-8ef2-d45f87fe4937",
+      "credentialsId": "eb83248c-d297-48a3-a0c1-f3b6fd0ba6b0",
       "host": "1.15.123.16",
       "port": "8888"
     }

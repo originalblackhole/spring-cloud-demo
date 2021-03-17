@@ -52,7 +52,7 @@ node {
         stage('package') {
 
             // checkout测试时使用,jenkins上面直接使用SCM
-            checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'e761309f-146f-4c5f-b7fd-1debf91fef38', url: 'https://gitee.com/original-blackhole/spring-cloud-demo.git']]])
+            //checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'e761309f-146f-4c5f-b7fd-1debf91fef38', url: 'https://gitee.com/original-blackhole/spring-cloud-demo.git']]])
             withEnv(["MVN_HOME=$mvnHome"]) {
                 if (isUnix()) {
                     sh "${mvnCMD}"
