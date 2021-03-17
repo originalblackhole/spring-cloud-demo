@@ -3,7 +3,7 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://192.168.3.63:8761/eureka
+      defaultZone: http://1.15.123.16:8761/eureka
     registry-fetch-interval-seconds: 5 # 拉取服务注册信息间隔时间 (默认为30秒)
   instance:
     lease-expiration-duration-in-seconds: 60  # 注册中心超过这个时间没收到心跳，会视为无效节点(默认为90秒)
@@ -11,7 +11,7 @@ eureka:
     preferIpAddress: true
     #instanceId: ${spring.cloud.client.ip-address}:${server.port}
     instance-id: ${eureka.instance.hostname}:${server.port}
-    hostname: 192.168.3.63
+    hostname: 123.60.9.127
 
   rabbitmq:
     host: 1.15.123.16

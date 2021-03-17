@@ -14,7 +14,7 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
   #服务注册中心实例的主机名
   instance:
-    hostname: 192.168.3.63
+    hostname: 1.15.123.16
     prefer-ip-address: true
     instance-id: ${eureka.instance.hostname}:${server.port}
   server:

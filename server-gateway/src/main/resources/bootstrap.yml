@@ -6,7 +6,7 @@ spring:
   cloud:
     config:
       name:  server-gateway,redis #配置文件名称前缀
-      uri: http://192.168.3.63:8888
+      uri: http://123.60.9.127:8888
       label: master
       profile: dev
 server:
